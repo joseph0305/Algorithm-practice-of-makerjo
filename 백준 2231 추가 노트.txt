@@ -1,0 +1,98 @@
+
+2231 문제의 시간 초를 더 줄일려고 , N에 만족하는 M을 만드는 경우를 줄이기 위해 if문을 놓았다
+근데 오히려 if 문을 놓아 M을 만드는 경우를 줄인 결과가 원래 경우보다 시간이 2배나 더 걸렸다.
+
+정확하지는 않지만 M을 더 만드는 횟수 보다 if문을 통해 검사하는 횟수가 더 많아서 오히려 연산량이 많이져서 그런 것 같다.
+
+
+[비교 코드]
+
+[원래 코드]
+N = int(input())
+
+def Digitlength( num ):
+  len = 0
+  while num:
+    num //= 10
+    len += 1
+  return len
+
+final_arr = []
+limit = Digitlength(N)
+
+if N in [10, 100, 1000, 10000, 100000, 1000000]:
+  limit = limit - 1
+arr = [0] * limit
+
+
+def disassemble(level):
+  equation = 0
+  len = limit
+  if level == limit:  
+    #equation = 101 * arr[0] + 11 * arr[1] + 2 * arr[2]
+    for i in arr:
+      re = ((10 ** (len-1))+1) * i 
+      len = len - 1
+      equation += re
+      
+    if equation == N:
+      final_arr.append(int("".join(map(str,arr))))
+    return
+  else:
+    for i in range(0, 10):
+      arr[level] = i
+      disassemble(level + 1)
+
+
+disassemble(0)
+
+if len(final_arr) == 0:
+  print(0)
+else:
+  print(min(final_arr))
+
+[바꾼 코드]
+N = int(input())
+
+def Digitlength( num ):
+  len = 0
+  while num:
+    num //= 10
+    len += 1
+  return len
+
+final_arr = []
+limit = Digitlength(N)
+
+arr = [0] * limit
+
+
+def disassemble(level):
+  equation = 0
+  len = limit
+  if level == limit:
+    for i in arr:
+      re = ((10 ** (len-1))+1) * i 
+      len = len - 1
+      equation += re
+    if equation == N:
+      final_arr.append(int("".join(map(str,arr))))
+    return
+  else:
+    for i in range(0, 10):
+      if  level ==0 and i > int(str(N)[0]):
+        return
+      arr[level] = i
+      disassemble(level + 1)
+
+
+disassemble(0)
+
+if len(final_arr) == 0:
+  print(0)
+else:
+  print(min(final_arr))
+
+
+[참고할 글]
+https://www.acmicpc.net/board/view/116375
