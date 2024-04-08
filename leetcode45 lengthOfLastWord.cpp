@@ -4,16 +4,13 @@
 class Solution {
 public:
     int lengthOfLastWord(string s) {
-        int len = s.length();
-      
-        int i = len;
+        int i = s.length() - 1;
         int count = 0;
         bool Notfirst_space = true;
-        while(i != 0){
-            i = i - 1;
-            if(i == len-1 && s[i] == ' '  ){
+        if( s[i] == ' '  ){
                 Notfirst_space = false;
-            }
+        }
+        while(i >= 0){
             if(s[i] != ' ' ){
                 count++;
                 Notfirst_space = true;
@@ -21,6 +18,7 @@ public:
             else if( s[i] == ' ' && Notfirst_space ){
                 return count;
             }
+            i = i - 1;
         }
         return count;
         
