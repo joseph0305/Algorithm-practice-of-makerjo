@@ -43,7 +43,7 @@ public:
         if (n == 0 || n == 1) {
             return 1;
         }
-        if (memo.find(n) == memo.end()) {
+        if (memo.find(n) == memo.end()) { // map 에 n이 없을때
             memo[n] = climbStairs(n-1, memo) + climbStairs(n-2, memo);
         }
         return memo[n];
