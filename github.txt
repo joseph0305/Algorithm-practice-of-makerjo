@@ -1,0 +1,7 @@
+https://velog.io/@jsy5324/%EB%A6%AC%ED%94%8C%EB%A6%BF%EC%97%90%EC%84%9C-git-commit-push
+
+[git push 방법]
+git init
+git add 폴더명 or 파일명
+git commit -m '메세지'
+git push -u origin main
