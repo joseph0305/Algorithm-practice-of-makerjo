@@ -38,3 +38,24 @@ class Solution:
     # 7 3 3 8
 
     #https://hongcana.tistory.com/41
+
+class Solution:
+
+def maxArea(self, height: List[int]) -> int:
+
+    max_area = 0
+    l = 0
+    r = len(height) - 1
+    while l < r:
+        area = (r - l) * min(height[r], height[l])
+        max_area = max(max_area, area)
+        if height[l] < height[r]:
+            l += 1
+        else:
+            r -= 1
+    return max_area
+
+
+    # 7 3 3 8
+    #https://www.youtube.com/watch?v=Kb20p6zy_14 (쉽게 설명)
+    #https://hongcana.tistory.com/41
